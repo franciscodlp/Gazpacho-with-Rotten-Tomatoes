@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1620D8121AFBC7080086F7E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1620D8111AFBC7080086F7E1 /* AppDelegate.swift */; };
-		1620D8141AFBC7080086F7E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1620D8131AFBC7080086F7E1 /* ViewController.swift */; };
 		1620D8171AFBC7080086F7E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1620D8151AFBC7080086F7E1 /* Main.storyboard */; };
 		1620D8191AFBC7080086F7E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1620D8181AFBC7080086F7E1 /* Images.xcassets */; };
 		1620D81C1AFBC7080086F7E1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1620D81A1AFBC7080086F7E1 /* LaunchScreen.xib */; };
 		1620D8281AFBC7080086F7E1 /* GazpachoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1620D8271AFBC7080086F7E1 /* GazpachoTests.swift */; };
+		27026886C7344600F2BDA80B /* libPods-Gazpacho.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FBE337FF5705CB7E736927 /* libPods-Gazpacho.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +29,15 @@
 		1620D80C1AFBC7080086F7E1 /* Gazpacho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gazpacho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1620D8101AFBC7080086F7E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1620D8111AFBC7080086F7E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1620D8131AFBC7080086F7E1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1620D8161AFBC7080086F7E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1620D8181AFBC7080086F7E1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1620D81B1AFBC7080086F7E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		1620D8211AFBC7080086F7E1 /* GazpachoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GazpachoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1620D8261AFBC7080086F7E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1620D8271AFBC7080086F7E1 /* GazpachoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazpachoTests.swift; sourceTree = "<group>"; };
+		636DC7B97E3C99540850CACD /* Pods-Gazpacho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gazpacho.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gazpacho/Pods-Gazpacho.release.xcconfig"; sourceTree = "<group>"; };
+		A1FBE337FF5705CB7E736927 /* libPods-Gazpacho.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Gazpacho.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDC3F4AEA7AA297DE76C62CB /* Pods-Gazpacho.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gazpacho.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gazpacho/Pods-Gazpacho.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27026886C7344600F2BDA80B /* libPods-Gazpacho.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +59,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04D2B4C16C83ACCC432DBEBD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CDC3F4AEA7AA297DE76C62CB /* Pods-Gazpacho.debug.xcconfig */,
+				636DC7B97E3C99540850CACD /* Pods-Gazpacho.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		1620D8031AFBC7080086F7E1 = {
 			isa = PBXGroup;
 			children = (
 				1620D80E1AFBC7080086F7E1 /* Gazpacho */,
 				1620D8241AFBC7080086F7E1 /* GazpachoTests */,
 				1620D80D1AFBC7080086F7E1 /* Products */,
+				04D2B4C16C83ACCC432DBEBD /* Pods */,
+				19EC7D56E4C3AE5F9A19B0C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				1620D8111AFBC7080086F7E1 /* AppDelegate.swift */,
-				1620D8131AFBC7080086F7E1 /* ViewController.swift */,
 				1620D8151AFBC7080086F7E1 /* Main.storyboard */,
 				1620D8181AFBC7080086F7E1 /* Images.xcassets */,
 				1620D81A1AFBC7080086F7E1 /* LaunchScreen.xib */,
@@ -112,6 +125,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		19EC7D56E4C3AE5F9A19B0C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1FBE337FF5705CB7E736927 /* libPods-Gazpacho.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +140,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1620D82B1AFBC7080086F7E1 /* Build configuration list for PBXNativeTarget "Gazpacho" */;
 			buildPhases = (
+				B8BD174BDAF536A1EED4B609 /* Check Pods Manifest.lock */,
 				1620D8081AFBC7080086F7E1 /* Sources */,
 				1620D8091AFBC7080086F7E1 /* Frameworks */,
 				1620D80A1AFBC7080086F7E1 /* Resources */,
+				CBFD13BC6D33AEDE61CFAEF6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,12 +230,44 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B8BD174BDAF536A1EED4B609 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CBFD13BC6D33AEDE61CFAEF6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Gazpacho/Pods-Gazpacho-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1620D8081AFBC7080086F7E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1620D8141AFBC7080086F7E1 /* ViewController.swift in Sources */,
 				1620D8121AFBC7080086F7E1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,6 +395,7 @@
 		};
 		1620D82C1AFBC7080086F7E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDC3F4AEA7AA297DE76C62CB /* Pods-Gazpacho.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Gazpacho/Info.plist;
@@ -350,6 +406,7 @@
 		};
 		1620D82D1AFBC7080086F7E1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 636DC7B97E3C99540850CACD /* Pods-Gazpacho.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Gazpacho/Info.plist;
@@ -411,6 +468,7 @@
 				1620D82D1AFBC7080086F7E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1620D82E1AFBC7080086F7E1 /* Build configuration list for PBXNativeTarget "GazpachoTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +477,7 @@
 				1620D8301AFBC7080086F7E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
