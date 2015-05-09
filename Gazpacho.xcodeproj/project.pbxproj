@@ -12,6 +12,13 @@
 		1620D8191AFBC7080086F7E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1620D8181AFBC7080086F7E1 /* Images.xcassets */; };
 		1620D81C1AFBC7080086F7E1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1620D81A1AFBC7080086F7E1 /* LaunchScreen.xib */; };
 		1620D8281AFBC7080086F7E1 /* GazpachoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1620D8271AFBC7080086F7E1 /* GazpachoTests.swift */; };
+		162B27141AFC18C30062B44E /* GazpachoDetailsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B27131AFC18C30062B44E /* GazpachoDetailsHeaderTableViewCell.swift */; };
+		162B27161AFD23650062B44E /* TestNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B27151AFD23650062B44E /* TestNetworkViewController.swift */; };
+		162B27181AFD2C0E0062B44E /* GazpachoNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B27171AFD2C0E0062B44E /* GazpachoNetworkErrorHandler.swift */; };
+		162B271A1AFD80240062B44E /* GazpachoCustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162B27191AFD80240062B44E /* GazpachoCustomCollectionViewCell.swift */; };
+		16D9A58A1AFBCA4E00754F06 /* GazpachoMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D9A5891AFBCA4E00754F06 /* GazpachoMainViewController.swift */; };
+		16D9A58F1AFBCE1F00754F06 /* GazpachoCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D9A58E1AFBCE1F00754F06 /* GazpachoCustomTableViewCell.swift */; };
+		16D9A5911AFBF4D100754F06 /* GazpachoMovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D9A5901AFBF4D100754F06 /* GazpachoMovieDetailsViewController.swift */; };
 		27026886C7344600F2BDA80B /* libPods-Gazpacho.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FBE337FF5705CB7E736927 /* libPods-Gazpacho.a */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +42,14 @@
 		1620D8211AFBC7080086F7E1 /* GazpachoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GazpachoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1620D8261AFBC7080086F7E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1620D8271AFBC7080086F7E1 /* GazpachoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GazpachoTests.swift; sourceTree = "<group>"; };
+		162B27131AFC18C30062B44E /* GazpachoDetailsHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GazpachoDetailsHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		162B27151AFD23650062B44E /* TestNetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNetworkViewController.swift; sourceTree = "<group>"; };
+		162B27171AFD2C0E0062B44E /* GazpachoNetworkErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GazpachoNetworkErrorHandler.swift; sourceTree = "<group>"; };
+		162B27191AFD80240062B44E /* GazpachoCustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GazpachoCustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		16D9A5891AFBCA4E00754F06 /* GazpachoMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GazpachoMainViewController.swift; sourceTree = "<group>"; };
+		16D9A58B1AFBCDEA00754F06 /* Gazpacho-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Gazpacho-Bridging-Header.h"; sourceTree = "<group>"; };
+		16D9A58E1AFBCE1F00754F06 /* GazpachoCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GazpachoCustomTableViewCell.swift; sourceTree = "<group>"; };
+		16D9A5901AFBF4D100754F06 /* GazpachoMovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GazpachoMovieDetailsViewController.swift; sourceTree = "<group>"; };
 		636DC7B97E3C99540850CACD /* Pods-Gazpacho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gazpacho.release.xcconfig"; path = "Pods/Target Support Files/Pods-Gazpacho/Pods-Gazpacho.release.xcconfig"; sourceTree = "<group>"; };
 		A1FBE337FF5705CB7E736927 /* libPods-Gazpacho.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Gazpacho.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDC3F4AEA7AA297DE76C62CB /* Pods-Gazpacho.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gazpacho.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Gazpacho/Pods-Gazpacho.debug.xcconfig"; sourceTree = "<group>"; };
@@ -92,10 +107,18 @@
 			isa = PBXGroup;
 			children = (
 				1620D8111AFBC7080086F7E1 /* AppDelegate.swift */,
+				16D9A5891AFBCA4E00754F06 /* GazpachoMainViewController.swift */,
+				162B27171AFD2C0E0062B44E /* GazpachoNetworkErrorHandler.swift */,
+				16D9A58E1AFBCE1F00754F06 /* GazpachoCustomTableViewCell.swift */,
+				162B27191AFD80240062B44E /* GazpachoCustomCollectionViewCell.swift */,
+				16D9A5901AFBF4D100754F06 /* GazpachoMovieDetailsViewController.swift */,
+				162B27131AFC18C30062B44E /* GazpachoDetailsHeaderTableViewCell.swift */,
+				162B27151AFD23650062B44E /* TestNetworkViewController.swift */,
 				1620D8151AFBC7080086F7E1 /* Main.storyboard */,
 				1620D8181AFBC7080086F7E1 /* Images.xcassets */,
 				1620D81A1AFBC7080086F7E1 /* LaunchScreen.xib */,
 				1620D80F1AFBC7080086F7E1 /* Supporting Files */,
+				16D9A58B1AFBCDEA00754F06 /* Gazpacho-Bridging-Header.h */,
 			);
 			path = Gazpacho;
 			sourceTree = "<group>";
@@ -268,7 +291,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				162B271A1AFD80240062B44E /* GazpachoCustomCollectionViewCell.swift in Sources */,
+				16D9A58F1AFBCE1F00754F06 /* GazpachoCustomTableViewCell.swift in Sources */,
+				16D9A5911AFBF4D100754F06 /* GazpachoMovieDetailsViewController.swift in Sources */,
+				16D9A58A1AFBCA4E00754F06 /* GazpachoMainViewController.swift in Sources */,
+				162B27161AFD23650062B44E /* TestNetworkViewController.swift in Sources */,
+				162B27181AFD2C0E0062B44E /* GazpachoNetworkErrorHandler.swift in Sources */,
 				1620D8121AFBC7080086F7E1 /* AppDelegate.swift in Sources */,
+				162B27141AFC18C30062B44E /* GazpachoDetailsHeaderTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,9 +428,12 @@
 			baseConfigurationReference = CDC3F4AEA7AA297DE76C62CB /* Pods-Gazpacho.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Gazpacho/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Gazpacho/Gazpacho-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -409,9 +442,11 @@
 			baseConfigurationReference = 636DC7B97E3C99540850CACD /* Pods-Gazpacho.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Gazpacho/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Gazpacho/Gazpacho-Bridging-Header.h";
 			};
 			name = Release;
 		};
