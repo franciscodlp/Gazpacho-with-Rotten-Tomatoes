@@ -14,7 +14,8 @@ class GazpachoMovieDetailsViewController: UIViewController, UITableViewDataSourc
     
     var movie: NSDictionary?
     
-    var characters: [[String]]?
+    var abridged_cast: [NSDictionary]?
+    var characters: [[String]?] = [[String]?]()
     var name: [String]?
     var lowResPosterURL: String = ""
     var highResPosterURL: String = ""
@@ -22,12 +23,13 @@ class GazpachoMovieDetailsViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         println("GazpachoMovieDetailsViewController: viewDidLoad")
         super.viewDidLoad()
-        
         println(movie)
         tableView.delegate = self
         tableView.dataSource = self
-    
-        characters = movie!.valueForKeyPath("abridged_cast.characters") as! [[String]]?
+        abridged_cast = movie!.valueForKey("abridged_cast") as? [NSDictionary]
+        for item in abridged_cast! {
+            characters.append(item.valueForKey("characters") as! [String]?)
+        }
         name = movie!.valueForKeyPath("abridged_cast.name") as! [String]?
         lowResPosterURL = movie!.valueForKeyPath("posters.original") as! String
         var range = lowResPosterURL.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
@@ -38,8 +40,8 @@ class GazpachoMovieDetailsViewController: UIViewController, UITableViewDataSourc
 
         println(lowResPosterURL)
         println(highResPosterURL)
-        println(characters!)
-        println(name!)
+        println(characters)
+        println(name)
         
         var tempImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
         
@@ -107,7 +109,7 @@ extension GazpachoMovieDetailsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 3:
-            return characters!.count
+            return characters.count
         case 4:
             return 5
         default:
@@ -187,8 +189,14 @@ extension GazpachoMovieDetailsViewController: UITableViewDataSource {
             cell.textLabel?.text = name![indexPath.row] as String
             
             cell.detailTextLabel?.backgroundColor = UIColor.clearColor()
-            cell.detailTextLabel?.text = "as " + (characters![indexPath.row] as [String])[0]
-        
+            
+            var charNames = characters[indexPath.row] as [String]?
+            
+            if charNames != nil {
+                cell.detailTextLabel?.text = "as " + (charNames![0] as String)
+            } else {
+                cell.detailTextLabel?.text = "as " + "-"
+            }
             return cell
             
         } else {
