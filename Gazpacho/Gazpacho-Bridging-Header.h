@@ -4,3 +4,5 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <UIImageView+AFNetworking.h>
+#import <MRProgress/MRProgress.h>
+#import <MRProgress/MRProgressOverlayView+AFNetworking.h>

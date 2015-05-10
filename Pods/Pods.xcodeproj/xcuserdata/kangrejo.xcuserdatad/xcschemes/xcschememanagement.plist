@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Gazpacho-MRProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Gazpacho.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>183B41B84C1304D58B0A43EA</key>
+		<key>364CB200B9A4EB47F44878BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9BCD1790A0AF6DAB309EFB75</key>
+		<key>923A0B1062B90EB4606647D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C9B61271DEBBD85602CD75D6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

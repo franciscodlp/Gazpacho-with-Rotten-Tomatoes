@@ -32,14 +32,18 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
     var topDVDs: [AnyObject]?
     var boxOffice: [AnyObject]?
     var postersThumbnailsURL: [String]?
+    var postersThumbnailsURLAlternative: [String]?
 
     var collectionViewFlowLayout = UICollectionViewFlowLayout()
     
     
     override func viewDidLoad() {
         println("viewDidLoad")
+        AFNetworkReachabilityManager.sharedManager().startMonitoring()
+        println(AFNetworkReachabilityManager.sharedManager().reachable)
         super.viewDidLoad()
         postersThumbnailsURL = [String]?()
+
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -62,19 +66,19 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidAppear(animated: Bool) {
         println("viewDidAppear")
         super.viewDidAppear(true)
+        AFNetworkReachabilityManager.sharedManager().startMonitoring()
+        println(AFNetworkReachabilityManager.sharedManager().reachable)
         
         segmentedControlContainerView.backgroundColor = UIColor(white: 1, alpha: 0.8)
         
         layoutSegmentedControl.selectedSegmentIndex = NSUserDefaults.standardUserDefaults().objectForKey("layoutSegmentedControllIndex") as? Int ?? 0
         
-        //postersThumbnailsURL = [String]?()
-        
         self.setLayOut()
         
         if self.tabBarController?.selectedIndex == 0 {
-            self.loadTopDVDsDataFromServer()
+            if topDVDs == nil { self.loadTopDVDsDataFromServer() }
         } else if self.tabBarController?.selectedIndex == 1 {
-            self.loadBoxOfficeDataFromServer()
+            if boxOffice == nil { self.loadBoxOfficeDataFromServer() }
         }
         
         self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableView.reloadData() : self.collectionView.reloadData()
@@ -117,25 +121,42 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
-    
     func loadTopDVDsDataFromServer() {
         println(">> loadTopDVDsDataFromServer")
-        var request = NSURLRequest(URL: topDVDURL!)
+        var request = NSURLRequest(URL: topDVDURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
         
         if AFNetworkReachabilityManager.sharedManager().reachable {
+        println("Network Reachable")
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
                 var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
                 self.topDVDs = responseDictionary["movies"] as! [AnyObject]?
+                self.postersThumbnailsURLAlternative = responseDictionary.valueForKeyPath("movies.posters.thumbnail") as! [String]?
                 
-                self.postersThumbnailsURL = responseDictionary.valueForKeyPath("movies.posters.thumbnail") as! [String]?
+                self.postersThumbnailsURL = []
+                var tempPostersThumbnailsURL = responseDictionary.valueForKeyPath("movies.posters.thumbnail") as! [String]?
+                for item in tempPostersThumbnailsURL! {
+                    var range = item.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
+                    var posterURL = ""
+                    if let range = range {
+                        posterURL = item.stringByReplacingCharactersInRange(range, withString: "http://content6.flixster.com/")
+                    } else {
+                        posterURL = item
+                    }
+                    self.postersThumbnailsURL?.append(posterURL)
+                }
+
                 
                 self.tableViewrefreshControl.endRefreshing()
                 self.collectionViewrefreshControl.endRefreshing()
                 
                 self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableView.reloadData() : self.collectionView.reloadData()
+                
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
+                
             }
         } else {
-            
+        println("Network NOT Reachable")
             self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableViewrefreshControl.endRefreshing() : self.collectionViewrefreshControl.endRefreshing()
             
         }
@@ -143,26 +164,41 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func loadBoxOfficeDataFromServer() {
-        if AFNetworkReachabilityManager.sharedManager().reachable {
         println(">> loadBoxOfficeDataFromServer")
-        var request = NSURLRequest(URL: boxOfficeURL!)
+        var request = NSURLRequest(URL: boxOfficeURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
+        
+        if AFNetworkReachabilityManager.sharedManager().reachable {
+            MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
                 var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
                 self.boxOffice = responseDictionary["movies"] as! [AnyObject]?
+                self.postersThumbnailsURLAlternative = responseDictionary.valueForKeyPath("movies.posters.thumbnail") as! [String]?
                 
-                self.postersThumbnailsURL = responseDictionary.valueForKeyPath("movies.posters.thumbnail") as! [String]?
-                
+                self.postersThumbnailsURL = []
+                var tempPostersThumbnailsURL = responseDictionary.valueForKeyPath("movies.posters.thumbnail") as! [String]?
+                for item in tempPostersThumbnailsURL! {
+                    var range = item.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
+                    var posterURL = ""
+                    if let range = range {
+                        posterURL = item.stringByReplacingCharactersInRange(range, withString: "http://content6.flixster.com/")
+                    } else {
+                        posterURL = item
+                    }
+                    self.postersThumbnailsURL?.append(posterURL)
+                }
+
                 self.tableViewrefreshControl.endRefreshing()
                 self.collectionViewrefreshControl.endRefreshing()
                 
                 self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableView.reloadData() : self.collectionView.reloadData()
+                MRProgressOverlayView.dismissOverlayForView(self.view, animated: true)
             }
         } else {
             self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableViewrefreshControl.endRefreshing() : self.collectionViewrefreshControl.endRefreshing()
         }
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -177,6 +213,8 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
         var vc = segue.destinationViewController as! GazpachoMovieDetailsViewController
 
         var indexPath = self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableView.indexPathForCell(sender as! UITableViewCell) : self.collectionView.indexPathForCell(sender as! UICollectionViewCell)
+        
+        vc.placeHolderImage.setImageWithURL(NSURL(string: postersThumbnailsURLAlternative![indexPath!.row])!, placeholderImage: nil)
         
         if self.tabBarController?.selectedIndex == 0 {
             vc.movie = topDVDs?[indexPath!.row] as? NSDictionary
@@ -211,7 +249,25 @@ extension GazpachoMainViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(customCellReuseIdentifier, forIndexPath: indexPath) as! GazpachoCustomTableViewCell
         
-        cell.posterThumb.setImageWithURL(NSURL(string: postersThumbnailsURL![indexPath.row])!)
+        var posterURL = postersThumbnailsURL![indexPath.row]
+//        println(posterURL)
+        posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_tmb", options: nil, range: nil)
+//        println(posterURL)
+        
+        var request = NSURLRequest(URL: NSURL(string: posterURL)!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
+        
+        cell.posterThumb.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
+            println("Success for indexpath: \(indexPath.row)")
+            cell.posterThumb.image = image
+            
+            }) { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
+            println("Failed to load proper image, using alternative for indexpath: \(indexPath.row)")
+//                println(response)
+//                println(error)
+            cell.posterThumb.setImageWithURL(NSURL(string: self.postersThumbnailsURLAlternative![indexPath.row])!, placeholderImage: nil)
+        }
+        
+        //cell.posterThumb.setImageWithURL(NSURL(string: posterURL)!)
         
         var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
         
@@ -245,9 +301,25 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let collectionCell = collectionView.dequeueReusableCellWithReuseIdentifier(collectionViewCellReuseIdentifier, forIndexPath: indexPath) as! GazpachoCustomCollectionViewCell
+        println("-- Cell For Row at Index --")
         
-        collectionCell.posterImageView.setImageWithURL(NSURL(string: postersThumbnailsURL![indexPath.row])!)
+        let collectionCell = collectionView.dequeueReusableCellWithReuseIdentifier(collectionViewCellReuseIdentifier, forIndexPath: indexPath) as! GazpachoCustomCollectionViewCell
+        var posterURL = postersThumbnailsURL![indexPath.row]
+        posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_pro", options: nil, range: nil)
+        var request = NSURLRequest(URL: NSURL(string: posterURL)!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
+        
+        collectionCell.posterImageView.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
+            println("Success for indexpath: \(indexPath.row)")
+            collectionCell.posterImageView.image = image
+            
+            }) { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
+                println("Failed to load proper image, using alternative for indexpath: \(indexPath.row)")
+//                println(response)
+//                println(error)
+                collectionCell.posterImageView.setImageWithURL(NSURL(string: self.postersThumbnailsURLAlternative![indexPath.row])!, placeholderImage: nil)
+        }
+        
+//        collectionCell.posterImageView.setImageWithURL(NSURL(string: posterURL)!)
         
         var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
         

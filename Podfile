@@ -3,6 +3,8 @@
 
 target 'Gazpacho' do
 pod 'AFNetworking'
+pod 'MRProgress'
+pod 'MRProgress/AFNetworking'
 end
 
 target 'GazpachoTests' do

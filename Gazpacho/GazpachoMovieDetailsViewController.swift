@@ -13,17 +13,17 @@ class GazpachoMovieDetailsViewController: UIViewController, UITableViewDataSourc
     @IBOutlet var tableView: UITableView!
     
     var movie: NSDictionary?
-    
     var abridged_cast: [NSDictionary]?
     var characters: [[String]?] = [[String]?]()
     var name: [String]?
     var lowResPosterURL: String = ""
     var highResPosterURL: String = ""
+    var placeHolderImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
     
     override func viewDidLoad() {
         println("GazpachoMovieDetailsViewController: viewDidLoad")
         super.viewDidLoad()
-        println(movie)
+       
         tableView.delegate = self
         tableView.dataSource = self
         abridged_cast = movie!.valueForKey("abridged_cast") as? [NSDictionary]
@@ -31,40 +31,30 @@ class GazpachoMovieDetailsViewController: UIViewController, UITableViewDataSourc
             characters.append(item.valueForKey("characters") as! [String]?)
         }
         name = movie!.valueForKeyPath("abridged_cast.name") as! [String]?
+        
         lowResPosterURL = movie!.valueForKeyPath("posters.original") as! String
+        
         var range = lowResPosterURL.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
         
         if let range = range {
             highResPosterURL = lowResPosterURL.stringByReplacingCharactersInRange(range, withString: "http://content6.flixster.com/")
         }
+        
+        
+        tableView.backgroundView = placeHolderImage
 
-        println(lowResPosterURL)
-        println(highResPosterURL)
-        println(characters)
-        println(name)
-        
         var tempImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
-        
-        println(lowResPosterURL)
-        tempImageView.setImageWithURL(NSURL(string: lowResPosterURL)!)
-        
-        tableView.backgroundView = tempImageView
-        
         var request = NSURLRequest(URL: NSURL(string: highResPosterURL)!)
-        
+
         tempImageView.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
-            
-            println("Yes")
-            
+
             tempImageView.image = image
             
             self.tableView.backgroundView = tempImageView
             
             }, failure: { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
-                println("No")
+                println(error)
         })
-
-
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
