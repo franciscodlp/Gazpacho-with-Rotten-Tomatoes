@@ -30,7 +30,33 @@ class GazpachoCustomTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        if selected {
+            self.contentView.backgroundColor = UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35.0 / 255.0), alpha: 1)
+        } else {
+            self.contentView.backgroundColor = UIColor.whiteColor()
+        }
     }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        
+        if highlighted {
+            
+            self.contentView.backgroundColor = UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35.0 / 255.0), alpha: 1)
+            posterThumb.transform = CGAffineTransformMakeScale(0.1, 0.1)
+            movieTitleLabel.transform = CGAffineTransformMakeScale(0.1, 0.1)
+            UIView.animateWithDuration(2.0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+                self.posterThumb.transform = CGAffineTransformIdentity
+                self.movieTitleLabel.transform = CGAffineTransformIdentity
+                }, completion: { (success:Bool) -> Void in
+                    println("mola")
+            })
+        } else {
+            
+            self.contentView.backgroundColor = UIColor.whiteColor()
+            
+        }
+    }
+    
 
 }

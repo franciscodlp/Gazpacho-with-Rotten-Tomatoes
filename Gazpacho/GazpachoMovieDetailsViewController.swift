@@ -143,7 +143,7 @@ extension GazpachoMovieDetailsViewController: UITableViewDataSource {
             
             cell.movieAudienceIcon.image = UIImage(named: "PopcornIcon")
             cell.criticsIcon.image = UIImage(named: "TomatoeIcon")
-            cell.likeItIcon.image = UIImage(named: "LikeIcon")
+            cell.likeItIcon.image = UIImage(named: "HeartOnlyIcon")
             
             cell.movieAudienceIcon.frame = CGRect(origin: cell.movieAudienceIcon.frame.origin, size: CGSize(width: 40, height: 39))
             cell.criticsIcon.frame = CGRect(origin: cell.criticsIcon.frame.origin, size: CGSize(width: 40, height: 39))

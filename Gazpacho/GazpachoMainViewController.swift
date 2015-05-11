@@ -245,6 +245,18 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
 
 }
 
+// MARK: - UITableViewDelegate
+
+extension GazpachoMainViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+    }
+    
+}
+
     // MARK: - UITableViewDataSource
 
 extension GazpachoMainViewController: UITableViewDataSource {
@@ -357,13 +369,18 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
         
         var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
         
-        collectionCell.bottomBackgroundView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        collectionCell.bottomBackgroundView.backgroundColor = UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35.0 / 255.0), alpha: 1)//UIColor(white: 1, alpha: 0.8)
         
         var audienceScore = ((data?[indexPath.row])!["ratings"] as! NSDictionary)["audience_score"] as? Int
         collectionCell.audienceScoreLabel.text = "\(audienceScore!)"
         var criticsScore = ((data?[indexPath.row])!["ratings"] as! NSDictionary)["critics_score"] as? Int
         collectionCell.criticsScoreLabel.text = "\(criticsScore!)"
-        collectionCell.mpaaRatingLabel.text = (data?[indexPath.row])!["mpaa_rating"] as? String
+        collectionCell.mpaaRatingLabel.text = " " + ( (data?[indexPath.row])!["mpaa_rating"] as? String )! + " ."
+        
+        collectionCell.mpaaRatingLabel.layer.cornerRadius = 3
+        collectionCell.mpaaRatingLabel.layer.borderWidth = 1
+        collectionCell.mpaaRatingLabel.sizeToFit()
+
 
 
         return collectionCell
@@ -375,6 +392,31 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
 
 extension GazpachoMainViewController: UICollectionViewDelegate {
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        var selectedCell = collectionView.cellForItemAtIndexPath(indexPath) as! GazpachoCustomCollectionViewCell
+        
+        selectedCell.posterImageView.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        selectedCell.bottomBackgroundView.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        selectedCell.audienceScoreLabel.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        selectedCell.criticsScoreLabel.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        selectedCell.mpaaRatingLabel.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        
+        UIView.animateWithDuration(2.0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            selectedCell.posterImageView.transform = CGAffineTransformIdentity
+            selectedCell.bottomBackgroundView.transform = CGAffineTransformIdentity
+            selectedCell.audienceScoreLabel.transform = CGAffineTransformIdentity
+            selectedCell.criticsScoreLabel.transform = CGAffineTransformIdentity
+            selectedCell.mpaaRatingLabel.transform = CGAffineTransformIdentity
+            
+            //self.movieTitleLabel.transform = CGAffineTransformIdentity
+            }, completion: { (success:Bool) -> Void in
+                println("mola")
+        })
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

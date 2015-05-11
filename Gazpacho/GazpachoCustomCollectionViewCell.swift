@@ -19,4 +19,8 @@ class GazpachoCustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet var criticsScoreLabel: UILabel!
     
     @IBOutlet var mpaaRatingLabel: UILabel!
+
+    
+
 }
+
