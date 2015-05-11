@@ -66,6 +66,13 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidAppear(animated: Bool) {
         println("viewDidAppear")
         super.viewDidAppear(true)
+        
+        self.tabBarController!.tabBar.tintColor = UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35 / 255.0), alpha: 1.0)
+
+        self.navigationController!.navigationBar.tintColor = UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35 / 255.0), alpha: 1.0)
+        
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(named: "GazpachoNavigationBG"), forBarMetrics: UIBarMetrics.Default)
+        
         AFNetworkReachabilityManager.sharedManager().startMonitoring()
         println(AFNetworkReachabilityManager.sharedManager().reachable)
         
@@ -128,6 +135,7 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
         if AFNetworkReachabilityManager.sharedManager().reachable {
         println("Network Reachable")
             MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true)
+
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
                 var responseDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
                 self.topDVDs = responseDictionary["movies"] as! [AnyObject]?
@@ -214,7 +222,18 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
 
         var indexPath = self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableView.indexPathForCell(sender as! UITableViewCell) : self.collectionView.indexPathForCell(sender as! UICollectionViewCell)
         
-        vc.placeHolderImage.setImageWithURL(NSURL(string: postersThumbnailsURLAlternative![indexPath!.row])!, placeholderImage: nil)
+        var posterURL = NSURL(string: postersThumbnailsURLAlternative![indexPath!.row])
+        
+        var request = NSURLRequest(URL: posterURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
+
+        vc.placeHolderImage.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, resposne: NSHTTPURLResponse!, image: UIImage!) -> Void in
+            
+            vc.placeHolderImage.image = image
+            
+            }) { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
+            
+                println(error)
+        }
         
         if self.tabBarController?.selectedIndex == 0 {
             vc.movie = topDVDs?[indexPath!.row] as? NSDictionary
@@ -250,24 +269,32 @@ extension GazpachoMainViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(customCellReuseIdentifier, forIndexPath: indexPath) as! GazpachoCustomTableViewCell
         
         var posterURL = postersThumbnailsURL![indexPath.row]
-//        println(posterURL)
+        
         posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_tmb", options: nil, range: nil)
-//        println(posterURL)
         
         var request = NSURLRequest(URL: NSURL(string: posterURL)!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
         
         cell.posterThumb.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
             println("Success for indexpath: \(indexPath.row)")
-            cell.posterThumb.image = image
+            
+            if response != nil {
+                cell.posterThumb.image = image
+                cell.posterThumb.alpha = 0
+                
+                UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                    cell.posterThumb.alpha = 1
+                    }, completion: { (success:Bool) -> Void in
+                    println(success)
+                })
+            } else {
+                cell.posterThumb.image = image
+            }
             
             }) { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
             println("Failed to load proper image, using alternative for indexpath: \(indexPath.row)")
-//                println(response)
-//                println(error)
+                
             cell.posterThumb.setImageWithURL(NSURL(string: self.postersThumbnailsURLAlternative![indexPath.row])!, placeholderImage: nil)
         }
-        
-        //cell.posterThumb.setImageWithURL(NSURL(string: posterURL)!)
         
         var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
         
@@ -310,16 +337,23 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
         
         collectionCell.posterImageView.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
             println("Success for indexpath: \(indexPath.row)")
-            collectionCell.posterImageView.image = image
-            
+            if response != nil {
+                collectionCell.posterImageView.image = image
+                collectionCell.posterImageView.alpha = 0
+                
+                UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                    collectionCell.posterImageView.alpha = 1
+                    }, completion: { (succes:Bool) -> Void in
+                    println(succes)
+                })
+            } else {
+                collectionCell.posterImageView.image = image
+            }
             }) { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
                 println("Failed to load proper image, using alternative for indexpath: \(indexPath.row)")
-//                println(response)
-//                println(error)
+
                 collectionCell.posterImageView.setImageWithURL(NSURL(string: self.postersThumbnailsURLAlternative![indexPath.row])!, placeholderImage: nil)
         }
-        
-//        collectionCell.posterImageView.setImageWithURL(NSURL(string: posterURL)!)
         
         var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
         

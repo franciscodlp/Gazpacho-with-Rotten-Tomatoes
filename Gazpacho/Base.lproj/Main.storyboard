@@ -168,6 +168,7 @@
                                             <segment title="List"/>
                                             <segment title="Grid"/>
                                         </segments>
+                                        <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -175,9 +176,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Bxi-Q3-izI">
-                        <nil key="title"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Top DVDs" id="BvP-eo-6q4"/>
                     <connections>
                         <outlet property="collectionView" destination="5F3-QZ-k9e" id="0ms-Ks-qye"/>
                         <outlet property="layoutSegmentedControl" destination="FTp-Hw-1lB" id="Va6-8U-UaC"/>
@@ -353,6 +352,7 @@
                                             <segment title="List"/>
                                             <segment title="Grid"/>
                                         </segments>
+                                        <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -360,9 +360,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="N4Q-ck-wTz">
-                        <nil key="title"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Box Office" id="amp-3m-MLU"/>
                     <connections>
                         <outlet property="collectionView" destination="aYw-TT-kyd" id="M4Q-pw-jiM"/>
                         <outlet property="layoutSegmentedControl" destination="LgI-pq-Qzb" id="Yd2-OT-I0T"/>
@@ -513,7 +511,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="BH9-XH-NLa"/>
+                    <navigationItem key="navigationItem" title="Movie Details" id="lCG-cy-0k8"/>
                     <connections>
                         <outlet property="tableView" destination="Ul7-qK-rIc" id="BRy-Gk-see"/>
                     </connections>
@@ -531,6 +529,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YwM-yj-fzz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                            <color key="textColor" red="0.96078431372549022" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -550,6 +552,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="9lZ-ev-7Td" kind="relationship" relationship="viewControllers" id="H0O-kw-oZm"/>
@@ -569,6 +572,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Hy-gI-ls0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                            <color key="textColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -595,6 +602,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="510-aB-a54"/>
+        <segue reference="qyj-90-wmP"/>
     </inferredMetricsTieBreakers>
 </document>

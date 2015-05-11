@@ -40,22 +40,33 @@ class GazpachoMovieDetailsViewController: UIViewController, UITableViewDataSourc
             highResPosterURL = lowResPosterURL.stringByReplacingCharactersInRange(range, withString: "http://content6.flixster.com/")
         }
         
-        
         tableView.backgroundView = placeHolderImage
 
-        var tempImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        var tempImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.tableView.backgroundView!.frame.size.width, height: self.tableView.backgroundView!.frame.size.height))
         var request = NSURLRequest(URL: NSURL(string: highResPosterURL)!)
 
         tempImageView.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
 
             tempImageView.image = image
-            
-            self.tableView.backgroundView = tempImageView
-            
+            if response != nil {
+                tempImageView.alpha = 0
+                tempImageView.frame.origin = self.tableView.frame.origin
+                self.tableView.backgroundView?.addSubview(tempImageView)
+                self.tableView.backgroundView?.bringSubviewToFront(tempImageView)
+                
+                UIView.animateWithDuration(2, delay: 0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                    (self.tableView.backgroundView!.subviews[0] as! UIImageView).alpha = 1
+                    }, completion: { (success:Bool) -> Void in
+                    self.tableView.backgroundView = tempImageView
+                })
+            } else {
+                self.tableView.backgroundView = tempImageView
+            }
             }, failure: { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
                 println(error)
         })
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
