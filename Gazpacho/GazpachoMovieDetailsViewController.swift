@@ -23,6 +23,10 @@ class GazpachoMovieDetailsViewController: UIViewController, UITableViewDataSourc
     override func viewDidLoad() {
         println("GazpachoMovieDetailsViewController: viewDidLoad")
         super.viewDidLoad()
+        
+        var notificationCenter = NSNotificationCenter.defaultCenter()
+        
+        notificationCenter.addObserver(self, selector: "saveMovieToWatchList", name: "saveMovieToWatchList", object: nil)
        
         tableView.delegate = self
         tableView.dataSource = self
@@ -72,6 +76,17 @@ class GazpachoMovieDetailsViewController: UIViewController, UITableViewDataSourc
         // Dispose of any resources that can be recreated.
     }
     
+    func saveMovieToWatchList() {
+        println("Saving Movie to WatchList")
+        println(movie!)
+        var tempWatchList: [NSDictionary]? = NSUserDefaults.standardUserDefaults().objectForKey("watchList") as! [NSDictionary]?
+        
+        if tempWatchList == nil { tempWatchList = [] }
+        tempWatchList!.append(movie!)
+        
+        NSUserDefaults.standardUserDefaults().setObject(tempWatchList, forKey: "watchList")
+        
+    }
 
     /*
     // MARK: - Navigation
@@ -143,11 +158,11 @@ extension GazpachoMovieDetailsViewController: UITableViewDataSource {
             
             cell.movieAudienceIcon.image = UIImage(named: "PopcornIcon")
             cell.criticsIcon.image = UIImage(named: "TomatoeIcon")
-            cell.likeItIcon.image = UIImage(named: "HeartOnlyIcon")
+            cell.addToWatchListButton.setImage(UIImage(named: "HeartStrokeIcon"), forState: UIControlState.Normal)
             
             cell.movieAudienceIcon.frame = CGRect(origin: cell.movieAudienceIcon.frame.origin, size: CGSize(width: 40, height: 39))
             cell.criticsIcon.frame = CGRect(origin: cell.criticsIcon.frame.origin, size: CGSize(width: 40, height: 39))
-            cell.likeItIcon.frame = CGRect(origin: cell.likeItIcon.frame.origin, size: CGSize(width: 40, height: 39))
+            cell.addToWatchListButton.imageView!.frame = CGRect(origin: cell.addToWatchListButton.frame.origin, size: CGSize(width: 40, height: 39))
             
             var audienceScore = movie!.valueForKeyPath("ratings.audience_score") as? Int
             cell.movieAudienceScoreLabel.text = "\(audienceScore!)%"
@@ -212,6 +227,8 @@ extension GazpachoMovieDetailsViewController: UITableViewDataSource {
     }
     
 }
+
+
 
 // MARK: - UITableViewDelegate
 

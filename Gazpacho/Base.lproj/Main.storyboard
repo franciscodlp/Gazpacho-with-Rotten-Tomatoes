@@ -188,6 +188,190 @@
             </objects>
             <point key="canvasLocation" x="1396" y="-47"/>
         </scene>
+        <!--Watch List-->
+        <scene sceneID="B9L-yk-9gc">
+            <objects>
+                <viewController title="Watch List" id="P1q-aL-mlA" customClass="GazpachoMainViewController" customModule="Gazpacho" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I1h-EW-f0Z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="22" sectionFooterHeight="22" id="5dM-Fy-U0O">
+                                <rect key="frame" x="0.0" y="50" width="320" height="518"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="customCell" rowHeight="81" id="YEf-SC-RTS" customClass="GazpachoCustomTableViewCell" customModule="Gazpacho" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="81"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YEf-SC-RTS" id="fH0-ir-PZJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="iDS-A8-FXc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="54" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lar-o3-ilA">
+                                                    <rect key="frame" x="62" y="8" width="250" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PopCornOnlyIcon" id="Mih-dF-kVk">
+                                                    <rect key="frame" x="57" y="29" width="17" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TomatoeOnlyIcon" id="apF-hO-toA">
+                                                    <rect key="frame" x="140" y="29" width="17" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="adQ-yd-omk">
+                                                    <rect key="frame" x="78" y="29" width="76" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fh8-lz-IeU">
+                                                    <rect key="frame" x="162" y="29" width="127" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h 30m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a0P-93-EzM">
+                                                    <rect key="frame" x="162" y="50" width="127" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PG-R" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qgs-yc-u6y">
+                                                    <rect key="frame" x="78" y="50" width="76" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="audienceScoreLabel" destination="adQ-yd-omk" id="mhj-c5-e91"/>
+                                            <outlet property="criticsScoreLabel" destination="Fh8-lz-IeU" id="0AA-FC-y6T"/>
+                                            <outlet property="movieTitleLabel" destination="Lar-o3-ilA" id="9gO-Ag-a1O"/>
+                                            <outlet property="mpaaRatingLabel" destination="Qgs-yc-u6y" id="5lo-pR-1Bz"/>
+                                            <outlet property="posterThumb" destination="iDS-A8-FXc" id="Jnv-2A-NKa"/>
+                                            <outlet property="runtimeLabel" destination="a0P-93-EzM" id="xjb-Iq-hgy"/>
+                                            <segue destination="Dfd-Iu-deC" kind="push" id="zp5-XC-oup"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="FBR-Uz-sGT">
+                                <rect key="frame" x="0.0" y="111" width="320" height="473"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yw2-Ja-RbI">
+                                    <size key="itemSize" width="145" height="218"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="gridCell" id="sR6-Pe-JfG" customClass="GazpachoCustomCollectionViewCell" customModule="Gazpacho" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="218"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="145" height="218"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ZPu-xb-4JM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="145" height="218"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" id="EDf-49-8l4">
+                                                    <rect key="frame" x="0.0" y="188" width="145" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zPy-9c-7Ce">
+                                                            <rect key="frame" x="27" y="4" width="29" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BZ3-b7-5jU">
+                                                            <rect key="frame" x="76" y="4" width="29" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="65A-Qk-b7u">
+                                                            <rect key="frame" x="96" y="4" width="41" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TomatoeOnlyIcon" id="cYe-fD-8Fa">
+                                                            <rect key="frame" x="59" y="7" width="15" height="15"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PopCornOnlyIcon" id="p5B-ot-nhy">
+                                                            <rect key="frame" x="8" y="7" width="15" height="15"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="audienceScoreLabel" destination="zPy-9c-7Ce" id="4hp-tb-vQI"/>
+                                            <outlet property="bottomBackgroundView" destination="EDf-49-8l4" id="OTR-Bi-QaT"/>
+                                            <outlet property="criticsScoreLabel" destination="BZ3-b7-5jU" id="mrP-1S-6QX"/>
+                                            <outlet property="mpaaRatingLabel" destination="65A-Qk-b7u" id="x6Z-U3-sNO"/>
+                                            <outlet property="posterImageView" destination="ZPu-xb-4JM" id="6T9-09-0Fq"/>
+                                            <segue destination="Dfd-Iu-deC" kind="push" id="jRz-G5-2pV"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view contentMode="scaleToFill" id="gJK-Yp-Xdp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Zjc-UX-I3T">
+                                        <rect key="frame" x="8" y="68" width="304" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="List"/>
+                                            <segment title="Grid"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Top DVDs" id="t3t-sM-S0a"/>
+                    <connections>
+                        <outlet property="collectionView" destination="FBR-Uz-sGT" id="CDf-X3-53R"/>
+                        <outlet property="layoutSegmentedControl" destination="Zjc-UX-I3T" id="12v-fi-Ot0"/>
+                        <outlet property="segmentedControlContainerView" destination="gJK-Yp-Xdp" id="cgs-zj-Lg7"/>
+                        <outlet property="tableView" destination="5dM-Fy-U0O" id="JTQ-s8-86D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yey-fF-cQR" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1396" y="1378"/>
+        </scene>
         <!--Box Office-->
         <scene sceneID="XMm-q0-nJd">
             <objects>
@@ -450,15 +634,21 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HeartOnlyIcon" id="gzk-QL-2tz">
-                                                    <rect key="frame" x="261" y="65" width="28" height="26"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Psi-bb-kMh">
+                                                    <rect key="frame" x="261" y="67" width="24" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="HeartStrokeIcon">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="addToWatchListButtonPressed:" destination="QLL-g3-irm" eventType="touchUpInside" id="mjB-zD-fGm"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addToWatchListButton" destination="Psi-bb-kMh" id="KBs-IF-Gzc"/>
                                             <outlet property="criticsIcon" destination="H8r-ez-Oon" id="8WQ-r0-Pt7"/>
-                                            <outlet property="likeItIcon" destination="gzk-QL-2tz" id="JC6-W3-kkx"/>
                                             <outlet property="movieAudienceIcon" destination="pNK-VA-d7e" id="pFW-nb-Pdd"/>
                                             <outlet property="movieAudienceScoreLabel" destination="mhp-sl-scG" id="SSH-mR-EU1"/>
                                             <outlet property="movieCriticsScoreLabel" destination="Vze-T5-0nr" id="tFo-3N-dFF"/>
@@ -518,7 +708,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWt-2f-Cis" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1988" y="194"/>
+            <point key="canvasLocation" x="1922" y="1026"/>
         </scene>
         <!--TopDVDs-->
         <scene sceneID="E86-0d-FCk">
@@ -557,6 +747,7 @@
                     <connections>
                         <segue destination="9lZ-ev-7Td" kind="relationship" relationship="viewControllers" id="H0O-kw-oZm"/>
                         <segue destination="TjL-jT-ZOJ" kind="relationship" relationship="viewControllers" id="vV8-VD-H2I"/>
+                        <segue destination="4cy-i9-2v3" kind="relationship" relationship="viewControllers" id="zOS-gX-Y1J"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jOy-pe-y8Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -586,13 +777,33 @@
             </objects>
             <point key="canvasLocation" x="964" y="713"/>
         </scene>
+        <!--Watch List-->
+        <scene sceneID="Gfw-be-7Yk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4cy-i9-2v3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Watch List" image="WatchListIcon" id="H43-51-jfu"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g2n-Ss-YnW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="P1q-aL-mlA" kind="relationship" relationship="rootViewController" id="O0J-ad-TA3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1AY-Ak-rF2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="964" y="1378"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="HeartOnlyIcon" width="25" height="21"/>
+        <image name="HeartStrokeIcon" width="24" height="20"/>
         <image name="PopCornOnlyIcon" width="21" height="29"/>
         <image name="PopcornIcon" width="45" height="45"/>
         <image name="TomatoeIcon" width="46" height="46"/>
         <image name="TomatoeOnlyIcon" width="24" height="23"/>
+        <image name="WatchListIcon" width="27" height="24"/>
         <image name="film" width="20" height="23"/>
         <image name="vinyl" width="23" height="23"/>
     </resources>

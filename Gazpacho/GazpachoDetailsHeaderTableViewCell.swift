@@ -26,7 +26,22 @@ class GazpachoDetailsHeaderTableViewCell: UITableViewCell {
     
     @IBOutlet var criticsIcon: UIImageView!
     
-    @IBOutlet var likeItIcon: UIImageView!
+    @IBOutlet var addToWatchListButton: UIButton!
+    
+    @IBAction func addToWatchListButtonPressed(sender: UIButton) {
+        
+        println("Pressed")
+        addToWatchListButton.setImage(UIImage(named: "HeartOnlyIcon"), forState: UIControlState.Normal)
+        addToWatchListButton.transform = CGAffineTransformMakeScale(0.1, 0.1)
+        UIView.animateWithDuration(2.0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: UIViewAnimationOptions.AllowUserInteraction, animations: { () -> Void in
+            self.addToWatchListButton.transform = CGAffineTransformIdentity
+            }, completion: { (success:Bool) -> Void in
+                
+        })
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "saveMovieToWatchList", object: nil))
+        
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

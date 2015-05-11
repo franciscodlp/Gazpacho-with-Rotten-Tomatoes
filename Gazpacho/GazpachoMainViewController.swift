@@ -31,6 +31,7 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
     
     var topDVDs: [AnyObject]?
     var boxOffice: [AnyObject]?
+    var watchList: [NSDictionary]?
     var postersThumbnailsURL: [String]?
     var postersThumbnailsURLAlternative: [String]?
 
@@ -43,7 +44,7 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
         println(AFNetworkReachabilityManager.sharedManager().reachable)
         super.viewDidLoad()
         postersThumbnailsURL = [String]?()
-
+        watchList = NSUserDefaults.standardUserDefaults().objectForKey("watchList") as! [NSDictionary]?
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -61,6 +62,7 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
         collectionViewrefreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.insertSubview(tableViewrefreshControl, atIndex: 0)
         self.collectionView.insertSubview(collectionViewrefreshControl, atIndex: 0)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -86,6 +88,10 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
             if topDVDs == nil { self.loadTopDVDsDataFromServer() }
         } else if self.tabBarController?.selectedIndex == 1 {
             if boxOffice == nil { self.loadBoxOfficeDataFromServer() }
+        } else if self.tabBarController?.selectedIndex == 2 {
+            println("Updating watchList")
+            watchList = NSUserDefaults.standardUserDefaults().objectForKey("watchList") as! [NSDictionary]?
+            println(watchList)
         }
         
         self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableView.reloadData() : self.collectionView.reloadData()
@@ -124,7 +130,16 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
     
     func onRefresh() {
         println("onRefresh")
-        self.tabBarController?.selectedIndex == 0 ? self.loadTopDVDsDataFromServer() : self.loadBoxOfficeDataFromServer()
+        if self.tabBarController?.selectedIndex == 0 {
+            self.loadTopDVDsDataFromServer()
+        } else if self.tabBarController?.selectedIndex == 1 {
+            self.loadBoxOfficeDataFromServer()
+        } else {
+            watchList = NSUserDefaults.standardUserDefaults().objectForKey("watchList") as! [NSDictionary]?
+            self.tableViewrefreshControl.endRefreshing()
+            self.collectionViewrefreshControl.endRefreshing()
+            println(watchList)
+        }
         
     }
     
@@ -222,7 +237,13 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
 
         var indexPath = self.layoutSegmentedControl.selectedSegmentIndex == 0 ? self.tableView.indexPathForCell(sender as! UITableViewCell) : self.collectionView.indexPathForCell(sender as! UICollectionViewCell)
         
-        var posterURL = NSURL(string: postersThumbnailsURLAlternative![indexPath!.row])
+        var posterURL: NSURL!
+        if self.tabBarController?.selectedIndex == 2 {
+            posterURL = NSURL(string: (watchList![indexPath!.row] as NSDictionary).valueForKeyPath("posters.thumbnail") as! String)
+            
+        } else {
+            posterURL = NSURL(string: postersThumbnailsURLAlternative![indexPath!.row])
+        }
         
         var request = NSURLRequest(URL: posterURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
 
@@ -237,8 +258,10 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
         
         if self.tabBarController?.selectedIndex == 0 {
             vc.movie = topDVDs?[indexPath!.row] as? NSDictionary
-        }else {
+        }else if self.tabBarController?.selectedIndex == 1 {
             vc.movie = boxOffice?[indexPath!.row] as? NSDictionary
+        } else if self.tabBarController?.selectedIndex == 2 {
+            vc.movie = watchList![indexPath!.row]
         }
     }
 
@@ -269,8 +292,12 @@ extension GazpachoMainViewController: UITableViewDataSource {
         
         if self.tabBarController!.selectedIndex == 0 {
             return topDVDs?.count ?? 0
-        } else {
+        } else if self.tabBarController!.selectedIndex == 1 {
             return boxOffice?.count ?? 0
+        } else if self.tabBarController!.selectedIndex == 2 {
+            return watchList?.count ?? 0
+        } else {
+            return 0
         }
     }
     
@@ -280,9 +307,14 @@ extension GazpachoMainViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(customCellReuseIdentifier, forIndexPath: indexPath) as! GazpachoCustomTableViewCell
         
-        var posterURL = postersThumbnailsURL![indexPath.row]
+        var posterURL: String!
         
-        posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_tmb", options: nil, range: nil)
+        if self.tabBarController?.selectedIndex == 2 {
+            posterURL =  (watchList![indexPath.row] as NSDictionary).valueForKeyPath("posters.thumbnail") as! String
+        } else {
+            posterURL = postersThumbnailsURL![indexPath.row]
+            posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_pro", options: nil, range: nil)
+        }
         
         var request = NSURLRequest(URL: NSURL(string: posterURL)!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
         
@@ -308,7 +340,16 @@ extension GazpachoMainViewController: UITableViewDataSource {
             cell.posterThumb.setImageWithURL(NSURL(string: self.postersThumbnailsURLAlternative![indexPath.row])!, placeholderImage: nil)
         }
         
-        var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
+        var data: [AnyObject]?
+        if self.tabBarController!.selectedIndex == 0 {
+            data = topDVDs
+        } else if self.tabBarController!.selectedIndex == 1 {
+            data = boxOffice
+        } else if self.tabBarController!.selectedIndex == 2 {
+            data = watchList
+        }
+        
+//        var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
         
         cell.movieTitleLabel.text = (data?[indexPath.row])!["title"] as? String
         var audienceScore = ((data?[indexPath.row])!["ratings"] as! NSDictionary)["audience_score"] as? Int
@@ -334,8 +375,12 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.tabBarController!.selectedIndex == 0 {
             return topDVDs?.count ?? 0
-        } else {
+        } else if self.tabBarController!.selectedIndex == 1 {
             return boxOffice?.count ?? 0
+        } else if self.tabBarController!.selectedIndex == 2 {
+            return watchList?.count ?? 0
+        } else {
+            return 0
         }
     }
     
@@ -343,8 +388,16 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
         println("-- Cell For Row at Index --")
         
         let collectionCell = collectionView.dequeueReusableCellWithReuseIdentifier(collectionViewCellReuseIdentifier, forIndexPath: indexPath) as! GazpachoCustomCollectionViewCell
-        var posterURL = postersThumbnailsURL![indexPath.row]
-        posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_pro", options: nil, range: nil)
+        
+        var posterURL: String!
+        
+        if self.tabBarController?.selectedIndex == 2 {
+            posterURL =  (watchList![indexPath.row] as NSDictionary).valueForKeyPath("posters.thumbnail") as! String
+        } else {
+            posterURL = postersThumbnailsURL![indexPath.row]
+            posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_pro", options: nil, range: nil)
+        }
+
         var request = NSURLRequest(URL: NSURL(string: posterURL)!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
         
         collectionCell.posterImageView.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
@@ -367,7 +420,15 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
                 collectionCell.posterImageView.setImageWithURL(NSURL(string: self.postersThumbnailsURLAlternative![indexPath.row])!, placeholderImage: nil)
         }
         
-        var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
+        var data: [AnyObject]?
+        if self.tabBarController!.selectedIndex == 0 {
+            data = topDVDs
+        } else if self.tabBarController!.selectedIndex == 1 {
+            data = boxOffice
+        } else if self.tabBarController!.selectedIndex == 2 {
+            data = watchList
+        }
+//        var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
         
         collectionCell.bottomBackgroundView.backgroundColor = UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35.0 / 255.0), alpha: 1)//UIColor(white: 1, alpha: 0.8)
         
