@@ -28,7 +28,8 @@ Time spent: 24h
 - [X] Custom App icon and Launch Screen (Extra)
 
 ### Walkthrough
-![Video Walkthrough](http://i.imgur.com/9d4fXIm.gif)
+![Video Walkthrough](http://i.imgur.com/7XS7rsz.gif)
+![Video Walkthrough](http://i.imgur.com/x3Xq2Qf.gif?1)
 
 Credits
 ---------
