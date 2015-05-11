@@ -17,14 +17,15 @@ Time spent: `<Number of hours spent>`
 
 #### Optional
 
-- [ ] All images fade in.
+- [X] All images fade in. Only when coming from network, not cache. 
 - [X] Segmented control to switch between list view and grid view
 - [X] For the larger poster, load the low-res first and switch to high-res when complete.
-- [ ] All images should be cached in memory and disk: AppDelegate has an instance of `NSURLCache` and `NSURLRequest` makes a request with `NSURLRequestReturnCacheDataElseLoad` cache policy. I tested it by turning off wifi and restarting the app.
+- [X] All images are cached in memory and disk: AppDelegate has an instance of `NSURLCache` and `NSURLRequest` makes a request with `NSURLRequestReturnCacheDataElseLoad` cache policy. I tested it by turning off wifi and restarting the app.
 - [ ] Customize the highlight and selection effect of the cell.
-- [ ] Customize the navigation bar.
+- [X] Customize the navigation bar.
 - [X] Add a tab bar for Box Office and DVD.
 - [ ] Add a search bar: pretty simple implementation of searching against the existing table view data.
+- [X] Custom App icon and Launch Screen
 
 ### Walkthrough
 ![Video Walkthrough](http://i.imgur.com/9d4fXIm.gif)
