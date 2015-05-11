@@ -146,7 +146,6 @@ class GazpachoMainViewController: UIViewController, UITableViewDataSource, UITab
     func loadTopDVDsDataFromServer() {
         println(">> loadTopDVDsDataFromServer")
         var request = NSURLRequest(URL: topDVDURL!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
-        
         if AFNetworkReachabilityManager.sharedManager().reachable {
         println("Network Reachable")
             MRProgressOverlayView.showOverlayAddedTo(self.view, title: "", mode: MRProgressOverlayViewMode.Indeterminate, animated: true)
@@ -393,11 +392,15 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
         
         if self.tabBarController?.selectedIndex == 2 {
             posterURL =  (watchList![indexPath.row] as NSDictionary).valueForKeyPath("posters.thumbnail") as! String
+            var range = posterURL.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
+            if let range = range {
+                posterURL = posterURL.stringByReplacingCharactersInRange(range, withString: "http://content6.flixster.com/")
+            }
         } else {
             posterURL = postersThumbnailsURL![indexPath.row]
-            posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_pro", options: nil, range: nil)
         }
-
+        
+        posterURL = posterURL.stringByReplacingOccurrencesOfString("_ori", withString: "_pro", options: nil, range: nil)
         var request = NSURLRequest(URL: NSURL(string: posterURL)!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 1000)
         
         collectionCell.posterImageView.setImageWithURLRequest(request, placeholderImage: nil, success: { (request: NSURLRequest!, response: NSHTTPURLResponse!, image: UIImage!) -> Void in
@@ -428,7 +431,6 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
         } else if self.tabBarController!.selectedIndex == 2 {
             data = watchList
         }
-//        var data = self.tabBarController!.selectedIndex == 0 ? topDVDs : boxOffice
         
         collectionCell.bottomBackgroundView.backgroundColor = UIColor(red: (245.0 / 255.0), green: (166.0 / 255.0), blue: (35.0 / 255.0), alpha: 1)//UIColor(white: 1, alpha: 0.8)
         
@@ -436,11 +438,11 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
         collectionCell.audienceScoreLabel.text = "\(audienceScore!)"
         var criticsScore = ((data?[indexPath.row])!["ratings"] as! NSDictionary)["critics_score"] as? Int
         collectionCell.criticsScoreLabel.text = "\(criticsScore!)"
-        collectionCell.mpaaRatingLabel.text = " " + ( (data?[indexPath.row])!["mpaa_rating"] as? String )! + " ."
+        collectionCell.mpaaRatingLabel.text = ( (data?[indexPath.row])!["mpaa_rating"] as? String )!
         
-        collectionCell.mpaaRatingLabel.layer.cornerRadius = 3
-        collectionCell.mpaaRatingLabel.layer.borderWidth = 1
-        collectionCell.mpaaRatingLabel.sizeToFit()
+//        collectionCell.mpaaRatingLabel.layer.cornerRadius = 3
+//        collectionCell.mpaaRatingLabel.layer.borderWidth = 1
+//        collectionCell.mpaaRatingLabel.sizeToFit()
 
 
 
