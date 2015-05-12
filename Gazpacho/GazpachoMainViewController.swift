@@ -419,8 +419,16 @@ extension GazpachoMainViewController: UICollectionViewDataSource {
             }
             }) { (request: NSURLRequest!, response: NSHTTPURLResponse!, error: NSError!) -> Void in
                 println("Failed to load proper image, using alternative for indexpath: \(indexPath.row)")
-
-                collectionCell.posterImageView.setImageWithURL(NSURL(string: self.postersThumbnailsURLAlternative![indexPath.row])!, placeholderImage: nil)
+                
+                var altPosterURL: String!
+                
+                if self.tabBarController?.selectedIndex == 2 {
+                    altPosterURL = (self.watchList![indexPath.row] as NSDictionary).valueForKeyPath("posters.thumbnail") as! String
+                } else {
+                    altPosterURL = self.postersThumbnailsURLAlternative![indexPath.row]
+                }
+                
+                collectionCell.posterImageView.setImageWithURL(NSURL(string: altPosterURL))
         }
         
         var data: [AnyObject]?
